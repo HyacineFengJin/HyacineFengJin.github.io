@@ -7,6 +7,8 @@
     <link rel="manifest" href="/site.webmanifest">
     <meta charset="UTF-8">
     <title>虚构史学！！！ | Hyacine</title>
+    <!-- 新增viewport设置 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
         /* 星空背景 */
         body {
@@ -87,6 +89,7 @@
             display: inline-block;
             margin: 10px 0;
             text-shadow: 0 0 8px rgba(157, 127, 239, 0.3);
+            font-size: 1.2em; /* 新增基础字号 */
         }
 
         .numbers {
@@ -110,6 +113,16 @@
             }
             .article {
                 padding: 20px;
+            }
+            /* 新增移动端标题调整 */
+            .title-text {
+                font-size: 1.4em !important;
+                display: block;
+                margin: 15px 0;
+            }
+            .content {
+                font-size: 15px; /* 微调正文字号 */
+                line-height: 1.6;
             }
         }
     </style>
