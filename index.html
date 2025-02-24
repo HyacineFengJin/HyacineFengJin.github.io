@@ -1,9 +1,12 @@
-<!DOCTYPE html>   <！DOCTYPE   ！文档类型 html   超文本标记语言 >   <！DOCTYPE   ！文档类型 html   超文本标记语言 >   <！DOCTYPE   ！文档类型 html   超文本标记语言 >   <！DOCTYPE   ！文档类型 html   超文本标记语言 >   <！DOCTYPE   ！文档类型 html   超文本标记语言 >   <！DOCTYPE   ！文档类型 html   超文本标记语言 >
-<html    < html lang = "应用" >lang="zh-CN">
-<head>   < >负责人
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
     <!-- 新增粒子动画库 -->
-    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>< script src = " https://cdn.jsdelivr.net
-pm/particles.js@2.0.0 particles.min.js " > < /脚本>
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
     
     <!-- 扩展字体库 -->
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&family=Press+Start+2P&display=swap" rel="stylesheet">
@@ -13,176 +16,176 @@ pm/particles.js@2.0.0 particles.min.js " > < /脚本>
     <meta name="theme-color" content="#0b0b2a">
     <title>虚构史学 | Hyacine</title>
     
-       < >风格<style>
+    <style>
         html {
-        scroll-behavior: smooth;   scroll-behavior:光滑;
+        scroll-behavior: smooth;
         }
 
-        :root {   :根{
-            --primary-gradient: linear-gradient(135deg, #7f9aea 0%, #9d7fef 50%, #ff9f43 100%);—初级梯度：线性梯度（135度，#7f9aea 0%, #9d7fef 50%, #ff9f43 100%）；
-            --neon-purple: #d16bff;   ——neon-purple: # d16bff;
-            --holographic-blue: #00f3ff;——holographic-blue: # 00 f3ff;
-            --bg-gradient: radial-gradient(circle at 50% 100%, #0b0b2a 0%, #1a1a4a 80%);——bg-gradient：径向梯度（圆形50% 100%，#0b0b2a 0%, #1a1a4a 80%）；
-            --text-glow: 0 0 20px rgba(209,107,255,0.6);——text-glow: 0 0 20px rgba(209,107,255,0.6)；
-            --star-color-1: rgba(255, 255, 255, 0.9);——star-color-1: rgba(255,255,255,0.9)；
-            --star-color-2: rgba(127, 154, 234, 0.8);——star-color-2: rgba(127,154,234,0.8)；
-            --nebula-color: linear-gradient(45deg, #2a2352 0%, #1a1a4a 100%);——星云颜色：线性渐变（45度，#2a2352 0%, #1a1a4a 100%）；
+        :root {
+            --primary-gradient: linear-gradient(135deg, #7f9aea 0%, #9d7fef 50%, #ff9f43 100%);
+            --neon-purple: #d16bff;
+            --holographic-blue: #00f3ff;
+            --bg-gradient: radial-gradient(circle at 50% 100%, #0b0b2a 0%, #1a1a4a 80%);
+            --text-glow: 0 0 20px rgba(209,107,255,0.6);
+            --star-color-1: rgba(255, 255, 255, 0.9);
+            --star-color-2: rgba(127, 154, 234, 0.8);
+            --nebula-color: linear-gradient(45deg, #2a2352 0%, #1a1a4a 100%);
         }
         
         /* 调整容器边距 */
         .container {
             margin-left: 320px;
-            padding: 20px;   填充:20 px;
-            position: relative;   位置:相对;
+            padding: 20px;
+            position: relative;
             z-index: 1;
-            background: transparent;   背景:透明;
+            background: transparent;
         }
 
 
         /* 三维星空容器 */
         .space-wrapper {
-            position: fixed;   位置:固定;
+            position: fixed;
             width: 100vw;
             height: 100vh;
-            perspective: 1000px;   角度:1000 px;
-            overflow: hidden;   溢出:隐藏;
-            z-index: -2;   z - index: 2;
+            perspective: 1000px;
+            overflow: hidden;
+            z-index: -2;
         }
 
         /* 动态星云背景 */
         .nebula-layer {
-            position: absolute;   位置:绝对的;
-            width: 200%;   宽度:200%;
-            height: 200%;   高度:200%;
-            background: var(--nebula-color);背景:var(——nebula-color);
-            animation: nebulaFlow 60s linear infinite;动画：nebulaFlow 60s线性无限；
-            opacity: 0.3;   透明度:0.3;
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: var(--nebula-color);
+            animation: nebulaFlow 60s linear infinite;
+            opacity: 0.3;
         }
 
-        @keyframes nebulaFlow {   keyframes星云流{
-            0% { transform: rotate(0deg) scale(1); }{transform: rotate（0°）scale(1)；}
-            50% { transform: rotate(180deg) scale(1.2); }50% {transform: rotate（180度）缩放（1.2）；}
-            100% { transform: rotate(360deg) scale(1); }100% {transform：旋转（360度）缩放(1)；}
+        @keyframes nebulaFlow {
+            0% { transform: rotate(0deg) scale(1); }
+            50% { transform: rotate(180deg) scale(1.2); }
+            100% { transform: rotate(360deg) scale(1); }
         }        
 
         /* 使用Canvas渲染星空 */
         #star-canvas {
-            position: fixed;   位置:固定;
-            top: 0;   上图:0;
-            left: 0;   左:0;
-            pointer-events: none;   pointer-events:没有;
-            z-index: -1;   z - index: 1;
+            position: fixed;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: -1;
         }
 
         /* 流星效果 */
         .meteor {
-            position: absolute;   位置:绝对的;
-            width: 120px;   宽度:120 px;
-            height: 2px;   高度:2 px;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.9));背景：线性渐变（90度，透明，rgba(255,255,255,0.9)）；
-            animation: meteorFall 3s infinite;动画：meteorFall 3s infinite；
-            transform-origin: left;   transform-origin:左;
-            filter: drop-shadow(0 0 10px rgba(255,255,255,0.9));滤镜：投影（0 0 10px rgba(255,255,255,0.9)）；
+            position: absolute;
+            width: 120px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.9));
+            animation: meteorFall 3s infinite;
+            transform-origin: left;
+            filter: drop-shadow(0 0 10px rgba(255,255,255,0.9));
         }
 
-        @keyframes meteorFall {   “MeteorFall”。
-            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); opacity: 0; }{transform: translateX(-100%) translateY(-100%) rotate（45度）；透明度:0;}
-            20% { opacity: 1; }   20%{不透明度：1；}
+        @keyframes meteorFall {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); opacity: 0; }
+            20% { opacity: 1; }
             100% { transform: translateX(100vw) translateY(100vh) rotate(45deg); opacity: 0; }
         }
 
         /* 增强版粒子效果 */
         #particles-js {
-            position: fixed;   位置:固定;
-            width: 100%;   宽度:100%;
-            height: 100%;   高度:100%;
+            position: fixed;
+            width: 100%;
+            height: 100%;
             z-index: 0;
-            background: radial-gradient(circle at 50% 100%, 背景：径向梯度(圆在50% 100%，
-                rgba(11,11,42,0.9) 0%,    rgba(42 11日,11日,0.9)0%,
+            background: radial-gradient(circle at 50% 100%, 
+                rgba(11,11,42,0.9) 0%, 
                 rgba(26,26,74,0.8) 80%) !important;
         }
 
         /* 银河光带效果 */
         .galaxy-band {
-            position: absolute;   位置:绝对的;
-            width: 200%;   宽度:200%;
-            height: 2px;   高度:2 px;
-            background: linear-gradient(90deg, 背景:线性渐变(90度,
-                transparent 10%,   透明的10%,
-                rgba(127,154,234,0.3) 50%,rgba (127154234, 0.3) 50%,
-                transparent 90%   透明的90%
+            position: absolute;
+            width: 200%;
+            height: 2px;
+            background: linear-gradient(90deg, 
+                transparent 10%,
+                rgba(127,154,234,0.3) 50%,
+                transparent 90%
             );
-            transform: rotate(-45deg);变换:旋转(-45度);
-           filter: blur(10px);   过滤器:模糊(10 px);
-            animation: galaxyScroll 120s linear infinite;动画：galaxyScroll 120秒线性无限；
+            transform: rotate(-45deg);
+           filter: blur(10px);
+            animation: galaxyScroll 120s linear infinite;
         }
 
         @keyframes galaxyScroll {
-            0% { transform: rotate(-45deg) translateX(-50%); }{transform   变换: rotate（-45度）translateX(-50%)；}
-            100% { transform: rotate(-45deg) translateX(50%); }100% {transform   变换: rotate（-45度）translateX(50%)；}
+            0% { transform: rotate(-45deg) translateX(-50%); }
+            100% { transform: rotate(-45deg) translateX(50%); }
         }
 
         /* 霓虹标题效果 */
         h1 {
-            font-family: 'Orbitron', sans-serif;font-family：宋体；
-            text-align: center;   text-align:中心;
-            font-size: 4rem;   字体大小:4快速眼动;
-            margin: 4rem 0;   Margin: 4rem 0；
-            position: relative;   位置:相对;
-            text-shadow: var(--text-glow);文本阴影:var(——text-glow   发光);
-            background: var(--primary-gradient);背景:var(——primary-gradient   梯度);
-            -webkit-background-clip: text;-webkit-background   背景-clip:文本;
-            -webkit-text-fill-color: transparent;-webkit-text-fill-color   颜色:透明;
-            animation: titleGlow 2s ease-in-out infinite alternate;动画：titleGlow 2s    年代ease-in   在-out无限交替；
+            font-family: 'Orbitron', sans-serif;
+            text-align: center;
+            font-size: 4rem;
+            margin: 4rem 0;
+            position: relative;
+            text-shadow: var(--text-glow);
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: titleGlow 2s ease-in-out infinite alternate;
         }
 
         @keyframes titleGlow {
-            0% { text-shadow: 0 0 20px rgba(209,107,255,0.6); }0% {text-shadow: 0 0 20px rgba(209,107,255,0.6)；}
-            100% { text-shadow: 0 0 40px rgba(209,107,255,0.8), 100% {text-shadow: 00 40px rgba(209,107,255,0.8)，
+            0% { text-shadow: 0 0 20px rgba(209,107,255,0.6); }
+            100% { text-shadow: 0 0 40px rgba(209,107,255,0.8), 
                           0 0 60px rgba(127,154,234,0.6); }
         }
 
         /* 全息卡片设计 */
         .article {
-            background: rgba(40, 40, 70, 0.25);背景：rgba(40,40,70,0.25)；
-            backdrop-filter: blur(20px);backdrop-filter:模糊(20 px);
+            background: rgba(40, 40, 70, 0.25);
+            backdrop-filter: blur(20px);
             border-radius: 15px;
-            padding: 2.5rem;   填充:2.5快速眼动;
-            margin: 3rem auto;   边距：3rem auto；
-            position: relative;   位置:相对;
-            border: 1px solid rgba(127,154,234,0.3);边框：1px solid rgba(127,154,234,0.3)；
-            box-shadow: 0 0 50px rgba(127,154,234,0.2),框影：0 0 50px rgba(127,154,234,0.2)，
-                       inset 0 0 20px rgba(209,107,255,0.1);Inset 0 0 20px rgba(209,107,255,0.1)；
-            transition: transform 0.3s, box-shadow 0.3s;过渡：变换0.3s，框影0.3s；
+            padding: 2.5rem;
+            margin: 3rem auto;
+            position: relative;
+            border: 1px solid rgba(127,154,234,0.3);
+            box-shadow: 0 0 50px rgba(127,154,234,0.2),
+                       inset 0 0 20px rgba(209,107,255,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
             max-width: 1000px;
         }
 
-        .article:hover {   .article:{徘徊
-            transform: translateY(-5px);变换:translateY (5 px);
-            box-shadow: 0 0 80px rgba(127,154,234,0.4),框影：0 0 80px rgba(127,154,234,0.4)，
-                       inset 0 0 30px rgba(209,107,255,0.2);Inset 0 0 30px rgba(209,107,255,0.2)；
+        .article:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 80px rgba(127,154,234,0.4),
+                       inset 0 0 30px rgba(209,107,255,0.2);
         }
 
         /* 动态边框特效 */
-        .article::before {   {前.article::
-            content: '';   内容:”;
-            position: absolute;   位置:绝对的;
-            inset: 0;   插图:0;
+        .article::before {
+            content: '';
+            position: absolute;
+            inset: 0;
             border-radius: 15px;
-            padding: 2px;   填充:2 px;
-            background: linear-gradient(45deg, 背景:线性渐变(45度,
-                var(--neon-purple),    var(——neon   ——霓虹-purple   紫色的),
-                var(--holographic-blue),   var(——holographic   ——全息-blue   蓝色的),
-                var(--neon-purple));   var(——neon   ——霓虹-purple   紫色的));
+            padding: 2px;
+            background: linear-gradient(45deg, 
+                var(--neon-purple), 
+                var(--holographic-blue),
+                var(--neon-purple));
             -webkit-mask: 
-                linear-gradient(#fff 0 0) content-box, 线性渐变（#fff 0 0） content-box，
-                linear-gradient(#fff 0 0);   线性渐变（#fff 0 0）；
-            mask-composite: exclude;   mask-composite:排除;
-            animation: borderFlow 3s linear infinite;动画：borderFlow 3s线性无限；
+                linear-gradient(#fff 0 0) content-box, 
+                linear-gradient(#fff 0 0);
+            mask-composite: exclude;
+            animation: borderFlow 3s linear infinite;
         }
 
         @keyframes borderFlow {
-            0% { background-position: 0% 50%; }0%{背景位置：0% 50%；}
+            0% { background-position: 0% 50%; }
             100% { background-position: 200% 50%; }
         }
 
@@ -202,7 +205,7 @@ pm/particles.js@2.0.0 particles.min.js " > < /脚本>
             border: 1px solid var(--neon-purple);
             box-shadow: 0 0 15px rgba(209,107,255,0.3);
             transition: all 0.3s ease;
-            position: relative;   位置:相对;
+            position: relative;
         }
 
         .title-text:hover {
@@ -215,37 +218,37 @@ pm/particles.js@2.0.0 particles.min.js " > < /脚本>
             color: #ff9f43;
             text-shadow: 0 0 10px rgba(0,243,255,0.8);
             font-weight: 700;
-            position: relative;   位置:相对;
+            position: relative;
         }
 
         .numbers::after {
-            content: '';   内容:”;
-            position: absolute;   位置:绝对的;
+            content: '';
+            position: absolute;
             bottom: -2px;
-            left: 0;   左:0;
-            width: 100%;   宽度:100%;
-            height: 2px;   高度:2 px;
-            background: linear-gradient(90deg, 背景:线性渐变(90度,
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, 
                 transparent, 
-                var(--holographic-blue),   var(——holographic   ——全息-blue   蓝色的),
+                var(--holographic-blue),
                 transparent);
             opacity: 0.6;
         }
 
        /* 重新设计标题样式 */
         h2 {
-            font-family: 'Orbitron', sans-serif;font-family：宋体；
+            font-family: 'Orbitron', sans-serif;
             color: transparent;
             font-size: 3.2rem;
             margin: 3rem 0;
-            position: relative;   位置:相对;
-            text-align: center;   text-align:中心;
+            position: relative;
+            text-align: center;
             text-transform: uppercase;
            background: linear-gradient(45deg, 
                 #7f9aea 25%, 
                 #d16bff 50%, 
                 #00f3ff 75%);
-            -webkit-background-clip: text;-webkit-background   背景-clip:文本;
+            -webkit-background-clip: text;
             background-clip: text;
             text-shadow: 0 0 30px rgba(127,154,234,0.8),
                          0 0 60px rgba(209,107,255,0.6),
@@ -271,9 +274,9 @@ pm/particles.js@2.0.0 particles.min.js " > < /脚本>
         /* 添加星空装饰元素 */
         h2::after {
             content: '✦✦✦✦✦';
-            position: absolute;   位置:绝对的;
-            width: 100%;   宽度:100%;
-            left: 0;   左:0;
+            position: absolute;
+            width: 100%;
+            left: 0;
             bottom: -1.5rem;
             font-size: 1.8rem;
             color: #7f9aea;
@@ -297,7 +300,7 @@ pm/particles.js@2.0.0 particles.min.js " > < /脚本>
             font-size: 0.9rem;
             margin-bottom: 2rem;
             text-align: right;
-            position: relative;   位置:相对;
+            position: relative;
             padding-right: 1.5rem;
             opacity: 0.8;
             transition: all 0.3s ease;
@@ -305,7 +308,7 @@ pm/particles.js@2.0.0 particles.min.js " > < /脚本>
 
         .author::before {
             content: '⏳';
-            position: absolute;   位置:绝对的;
+            position: absolute;
             right: -0.5rem;
             top: 50%;
             transform: translateY(-50%);
@@ -321,23 +324,23 @@ pm/particles.js@2.0.0 particles.min.js " > < /脚本>
 
         /* 全息进度条特效 */
         .content p {
-            position: relative;   位置:相对;
+            position: relative;
             padding: 1.5rem;
             margin: 1.5rem 0;
             background: rgba(20,20,50,0.3);
             border-left: 3px solid var(--neon-purple);
             border-radius: 5px;
             transition: all 0.3s ease;
-            overflow: hidden;   溢出:隐藏;
+            overflow: hidden;
         }
 
         .content p::before {
-            content: '';   内容:”;
-            position: absolute;   位置:绝对的;
-            top: 0;   上图:0;
+            content: '';
+            position: absolute;
+            top: 0;
             left: -100%;
-            width: 100%;   宽度:100%;
-            height: 100%;   高度:100%;
+            width: 100%;
+            height: 100%;
             background: linear-gradient(
                 90deg,
                 transparent 25%,
@@ -354,7 +357,7 @@ pm/particles.js@2.0.0 particles.min.js " > < /脚本>
 
         /* 新增角色目录样式 */
         .character-directory {
-            position: fixed;   位置:固定;
+            position: fixed;
             left: 2rem;
             top: 50%;
             transform: translateY(-50%);
@@ -376,8 +379,8 @@ pm/particles.js@2.0.0 particles.min.js " > < /脚本>
             transition: all 0.3s ease;
             background: rgba(255,255,255,0.05);
             cursor: pointer;
-            position: relative;   位置:相对;
-            overflow: hidden;   溢出:隐藏;
+            position: relative;
+            overflow: hidden;
         }
 
         .directory-item:hover {
@@ -420,9 +423,9 @@ pm/particles.js@2.0.0 particles.min.js " > < /脚本>
         }
 
         .character-info h3 {
-            margin: 0;   保证金:0;
+            margin: 0;
             color: #ff9f43;
-            font-family: 'Orbitron', sans-serif;font-family：宋体；
+            font-family: 'Orbitron', sans-serif;
         }
 
         .character-meta {
@@ -484,10 +487,10 @@ pm/particles.js@2.0.0 particles.min.js " > < /脚本>
 
         /* 粒子动画控制 */
         .particles-js-canvas-el {
-            position: fixed;   位置:固定;
-            top: 0;   上图:0;
-            left: 0;   左:0;
-            z-index: -1;   z - index   指数: 1;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: -1;
         }
     </style>
 </head>
@@ -543,7 +546,7 @@ pm/particles.js@2.0.0 particles.min.js " > < /脚本>
     </div>
     <div id="particles-js"></div>
     <div class="container" style="margin-left: 320px;"></div>
-    <div class="container">   < div class = " container”>
+    <div class="container">
         <h1>虚构史学家<br>角色畅想</h1>
         
         <!-- 原内容结构保持不变 -->
@@ -585,7 +588,7 @@ pm/particles.js@2.0.0 particles.min.js " > < /脚本>
                 <span class="title-text">星魂1·空界咏叹</span><br> 
                 持有【天空庇护】的我方目标效果抵抗提高 <span class="numbers">30%</span> ，暴击率提高 <span class="numbers">20%</span> ，并在云界棱镜回合开始时解除 <span class="numbers">1</span> 个负面效果。<br> 
                 <span class="title-text">星魂2·浮梦显空</span><br> 
-                云界棱镜忆灵技造成的伤害为原伤害 <span class="numbers">120%</span> 的真实伤害。我方目标消耗生命值时，使其以及其忆灵下一次造成的伤害为原伤害的 <span class="numbers">125%</span> 。<br> 
+                云界棱镜忆灵技造成的伤害为原伤害 1<span class="numbers">20%</span> 的真实伤害。我方目标消耗生命值时，使其以及其忆灵下一次造成的伤害为原伤害的 <span class="numbers">125%</span> 。<br> 
                 <span class="title-text">星魂4·晨昏永续</span><br> 
                 云界棱镜在场时，若风堇召唤忆灵，则会使云界棱镜获得等同于我方全体生命上限 <span class="numbers">30%</span> 的额外生命值，重复获得额外生命值时，额外生命值可以叠加，最多不超过我方全体生命上限的 <span class="numbers">45%</span> 。<br> 
                 <span class="title-text">星魂6·天穹咏者</span><br> 
