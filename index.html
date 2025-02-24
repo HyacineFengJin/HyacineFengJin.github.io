@@ -1,318 +1,552 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-    <link rel="manifest" href="/site.webmanifest">
-    <!-- 新增字体预加载 -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <!-- 新增粒子动画库 -->
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
     
-    <!-- 新增meta优化 -->
+    <!-- 扩展字体库 -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&family=Press+Start+2P&display=swap" rel="stylesheet">
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
     <meta name="theme-color" content="#0b0b2a">
     <title>虚构史学 | Hyacine</title>
     
     <style>
+        html {
+        scroll-behavior: smooth;
+        }
+
         :root {
-            --primary-color: #7f9aea;
-            --secondary-color: #9d7fef;
-            --accent-color: #ff9f43;
-            --bg-gradient: linear-gradient(135deg, #0b0b2a 0%, #1a1a4a 100%);
-            --text-primary: #e0e0e0;
-            --text-secondary: #a0a0c0;
-            --card-bg: rgba(40, 40, 70, 0.95);
+            --primary-gradient: linear-gradient(135deg, #7f9aea 0%, #9d7fef 50%, #ff9f43 100%);
+            --neon-purple: #d16bff;
+            --holographic-blue: #00f3ff;
+            --bg-gradient: radial-gradient(circle at 50% 100%, #0b0b2a 0%, #1a1a4a 80%);
+            --text-glow: 0 0 20px rgba(209,107,255,0.6);
+            --star-color-1: rgba(255, 255, 255, 0.9);
+            --star-color-2: rgba(127, 154, 234, 0.8);
+            --nebula-color: linear-gradient(45deg, #2a2352 0%, #1a1a4a 100%);
         }
-
-        /* 优化星空背景 */
-        body {
-            margin: 0;
-            background: 
-                radial-gradient(circle at 10% 20%, rgba(255,255,255,0.05) 0.5px, transparent 1px),
-                radial-gradient(circle at 90% 80%, rgba(255,255,255,0.05) 0.5px, transparent 1px),
-                var(--bg-gradient);
-            background-size: 300% 300%;
-            animation: stars 30s linear infinite;
-            color: var(--text-primary);
-            font-family: 'Poppins', 'Segoe UI', system-ui, sans-serif;
-            line-height: 1.7;
-            min-height: 100vh;
-            overflow-x: hidden;
+        
+        /* 调整容器边距 */
+        .container {
+            margin-left: 320px;
+            padding: 20px;
             position: relative;
+            z-index: 1;
+            background: transparent;
         }
 
-        /* 增强粒子效果 */
-        body::after {
-            content: '';
+
+        /* 三维星空容器 */
+        .space-wrapper {
+            position: fixed;
+            width: 100vw;
+            height: 100vh;
+            perspective: 1000px;
+            overflow: hidden;
+            z-index: -2;
+        }
+
+        /* 动态星云背景 */
+        .nebula-layer {
             position: absolute;
+            width: 200%;
+            height: 200%;
+            background: var(--nebula-color);
+            animation: nebulaFlow 60s linear infinite;
+            opacity: 0.3;
+        }
+
+        @keyframes nebulaFlow {
+            0% { transform: rotate(0deg) scale(1); }
+            50% { transform: rotate(180deg) scale(1.2); }
+            100% { transform: rotate(360deg) scale(1); }
+        }        
+
+        /* 使用Canvas渲染星空 */
+        #star-canvas {
+            position: fixed;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
-            background: 
-                radial-gradient(circle at 20% 30%, rgba(255,255,255,0.1) 0.3px, transparent 0.5px),
-                radial-gradient(circle at 70% 90%, rgba(255,255,255,0.1) 0.3px, transparent 0.5px);
-            background-size: 50px 50px;
-            animation: twinkle 2.5s ease-in-out infinite;
             pointer-events: none;
-            z-index: 0;
-        }
-
-        /* 新增全局装饰元素 */
-        .decorative-corner {
-            position: fixed;
-            width: 120px;
-            height: 120px;
-            border: 2px solid rgba(127, 154, 234, 0.2);
-            pointer-events: none;
-        }
-        .decorative-corner:nth-child(1) {
-            top: 20px;
-            left: 20px;
-            border-right: none;
-            border-bottom: none;
-        }
-        .decorative-corner:nth-child(2) {
-            bottom: 20px;
-            right: 20px;
-            border-left: none;
-            border-top: none;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 60px 30px;
-            position: relative;
-            z-index: 2;
-        }
-
-        /* 优化标题样式 */
-        h1 {
-            color: var(--primary-color);
-            text-align: center;
-            font-size: 3.2rem;
-            margin: 3rem 0;
-            position: relative;
-            text-shadow: 0 0 35px rgba(127, 154, 234, 0.5);
-            background: linear-gradient(135deg, #7f9aea 30%, #9d7fef 70%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        h1::before,
-        h1::after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            width: 25%;
-            height: 3px;
-            background: linear-gradient(90deg, 
-                transparent, 
-                rgba(127, 154, 234, 0.6),
-                transparent);
-            transform: translateY(-50%);
-        }
-
-        /* 优化卡片样式 */
-        .article {
-            background: var(--card-bg);
-            backdrop-filter: blur(16px);
-            border-radius: 20px;
-            padding: 40px;
-            margin-bottom: 40px;
-            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5),
-                       inset 0 0 20px rgba(255,255,255,0.08);
-            border: 1px solid rgba(127, 154, 234, 0.2);
-            transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), 
-                      box-shadow 0.4s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .article::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 200%;
-            height: 100%;
-            background: linear-gradient(
-                90deg,
-                transparent 25%,
-                rgba(127, 154, 234,0.15) 50%,
-                transparent 75%
-            );
-            animation: cardGlow 3s linear infinite;
-            opacity: 0.15;
             z-index: -1;
         }
 
-        @keyframes cardGlow {
-            0% { left: -100%; }
-            100% { left: 100%; }
-        }
-
-        /* 强化标题装饰 */
-        h2 {
-            color: var(--primary-color);
-            font-size: 2em;
-            margin: 0 0 1.5em;
-            padding-left: 25px;
-            position: relative;
-            display: inline-block;
-            background: linear-gradient(90deg, 
-                rgba(127, 154, 234, 0.2) 0%, 
-                transparent 100%);
-            padding: 12px 25px;
-            border-radius: 8px;
-        }
-
-        /* 新增技能条目悬浮效果 */
-        .content p {
-            position: relative;
-            padding: 15px;
-            margin: 1.2em 0;
-            background: rgba(30, 30, 60, 0.4);
-            border-left: 3px solid var(--secondary-color);
-            border-radius: 4px;
-            transition: all 0.3s ease;
-        }
-
-        .content p:hover {
-            transform: translateX(10px);
-            background: rgba(40, 40, 80, 0.6);
-            box-shadow: 3px 3px 15px rgba(0,0,0,0.3);
-        }
-
-        /* 恢复并强化标题样式 */
-       .title-text {
-            color: var(--secondary-color);
-            display: inline-block;
-            margin: 1.5em 0 1em;
-            font-size: 1.2em;
-            font-weight: 600;
-            position: relative;
-            padding: 8px 20px;
-            text-shadow: 0 0 12px rgba(157, 127, 239, 0.4);
-            background: rgba(40, 40, 70, 0.6);
-            border-radius: 6px;
-            border: 1px solid rgba(157, 127, 239, 0.3);
-            transition: all 0.3s ease;
-        }
-
-        .title-text::before {
-            content: '';
+        /* 流星效果 */
+        .meteor {
             position: absolute;
-            left: 0;
-            top: 0;
-            width: 3px;
+            width: 120px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.9));
+            animation: meteorFall 3s infinite;
+            transform-origin: left;
+            filter: drop-shadow(0 0 10px rgba(255,255,255,0.9));
+        }
+
+        @keyframes meteorFall {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); opacity: 0; }
+            20% { opacity: 1; }
+            100% { transform: translateX(100vw) translateY(100vh) rotate(45deg); opacity: 0; }
+        }
+
+        /* 增强版粒子效果 */
+        #particles-js {
+            position: fixed;
+            width: 100%;
             height: 100%;
-            background: linear-gradient(
-                180deg, 
-                var(--secondary-color) 0%, 
-                rgba(157, 127, 239, 0) 100%
-            );
-            border-radius: 2px;
+            z-index: 0;
+            background: radial-gradient(circle at 50% 100%, 
+                rgba(11,11,42,0.9) 0%, 
+                rgba(26,26,74,0.8) 80%) !important;
         }
 
-        .title-text::after {
+        /* 银河光带效果 */
+        .galaxy-band {
+            position: absolute;
+            width: 200%;
+            height: 2px;
+            background: linear-gradient(90deg, 
+                transparent 10%,
+                rgba(127,154,234,0.3) 50%,
+                transparent 90%
+            );
+            transform: rotate(-45deg);
+           filter: blur(10px);
+            animation: galaxyScroll 120s linear infinite;
+        }
+
+        @keyframes galaxyScroll {
+            0% { transform: rotate(-45deg) translateX(-50%); }
+            100% { transform: rotate(-45deg) translateX(50%); }
+        }
+
+        /* 霓虹标题效果 */
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            text-align: center;
+            font-size: 4rem;
+            margin: 4rem 0;
+            position: relative;
+            text-shadow: var(--text-glow);
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: titleGlow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes titleGlow {
+            0% { text-shadow: 0 0 20px rgba(209,107,255,0.6); }
+            100% { text-shadow: 0 0 40px rgba(209,107,255,0.8), 
+                          0 0 60px rgba(127,154,234,0.6); }
+        }
+
+        /* 全息卡片设计 */
+        .article {
+            background: rgba(40, 40, 70, 0.25);
+            backdrop-filter: blur(20px);
+            border-radius: 15px;
+            padding: 2.5rem;
+            margin: 3rem auto;
+            position: relative;
+            border: 1px solid rgba(127,154,234,0.3);
+            box-shadow: 0 0 50px rgba(127,154,234,0.2),
+                       inset 0 0 20px rgba(209,107,255,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            max-width: 1000px;
+        }
+
+        .article:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 80px rgba(127,154,234,0.4),
+                       inset 0 0 30px rgba(209,107,255,0.2);
+        }
+
+        /* 动态边框特效 */
+        .article::before {
             content: '';
             position: absolute;
-            right: -10px;
-            top: 50%;
-            width: 8px;
-            height: 8px;
-            background: var(--accent-color);
-            transform: translateY(-50%) rotate(45deg);
-            opacity: 0.6;
+            inset: 0;
+            border-radius: 15px;
+            padding: 2px;
+            background: linear-gradient(45deg, 
+                var(--neon-purple), 
+                var(--holographic-blue),
+                var(--neon-purple));
+            -webkit-mask: 
+                linear-gradient(#fff 0 0) content-box, 
+                linear-gradient(#fff 0 0);
+            mask-composite: exclude;
+            animation: borderFlow 3s linear infinite;
+        }
+
+        @keyframes borderFlow {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 200% 50%; }
+        }
+
+        /* 新增正文颜色设置 */
+        .content {
+            color: #fff;
+            line-height: 1.8;
+        }
+
+        /* 技能条目全息效果 */
+        .title-text {
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            margin: 1.5rem 0;
+            background: rgba(40, 40, 70, 0.6);
+            border-radius: 8px;
+            border: 1px solid var(--neon-purple);
+            box-shadow: 0 0 15px rgba(209,107,255,0.3);
+            transition: all 0.3s ease;
+            position: relative;
         }
 
         .title-text:hover {
-            transform: translateX(8px);
-            box-shadow: 0 4px 15px rgba(157, 127, 239, 0.3);
+            transform: scale(1.05);
+            box-shadow: 0 0 25px rgba(209,107,255,0.5);
         }
 
-        /* 优化数值高光 */
+        /* 数据高光特效 */
         .numbers {
-            position: relative;
-            padding: 0 4px;
+            color: #ff9f43;
+            text-shadow: 0 0 10px rgba(0,243,255,0.8);
             font-weight: 700;
-            color: var(--accent-color);
-            text-shadow: 0 0 12px rgba(255, 159, 67, 0.4);
+            position: relative;
         }
 
         .numbers::after {
             content: '';
             position: absolute;
-            left: 0;
             bottom: -2px;
+            left: 0;
             width: 100%;
             height: 2px;
             background: linear-gradient(90deg, 
-                var(--accent-color), 
+                transparent, 
+                var(--holographic-blue),
                 transparent);
+            opacity: 0.6;
         }
 
-        /* 新增章节切换动效 */
-        .article {
-            view-timeline-name: --article;
-            view-timeline-axis: block;
-            animation: articleReveal auto linear;
-            animation-timeline: --article;
-            animation-range: entry 25% cover 50%;
+       /* 重新设计标题样式 */
+        h2 {
+            font-family: 'Orbitron', sans-serif;
+            color: transparent;
+            font-size: 3.2rem;
+            margin: 3rem 0;
+            position: relative;
+            text-align: center;
+            text-transform: uppercase;
+           background: linear-gradient(45deg, 
+                #7f9aea 25%, 
+                #d16bff 50%, 
+                #00f3ff 75%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            text-shadow: 0 0 30px rgba(127,154,234,0.8),
+                         0 0 60px rgba(209,107,255,0.6),
+                         0 0 90px rgba(0,243,255,0.4);
+            animation: titleFlow 4s ease-in-out infinite;
         }
 
-        @keyframes articleReveal {
-            from {
-                opacity: 0;
-                transform: translateY(50px);
+        @keyframes titleFlow {
+           0% { 
+                background-position: 0% 50%;
+                filter: hue-rotate(0deg);
             }
-            to {
-                opacity: 1;
-                transform: translateY(0);
+            50% {
+                background-position: 100% 50%;
+                filter: hue-rotate(60deg);
+            }
+            100% {
+               background-position: 0% 50%;
+                filter: hue-rotate(0deg);
             }
         }
 
-        /* 优化移动端体验 */
+        /* 添加星空装饰元素 */
+        h2::after {
+            content: '✦✦✦';
+            position: absolute;
+            width: 100%;
+            left: 0;
+            bottom: -1.5rem;
+            font-size: 1.8rem;
+            color: #7f9aea;
+            opacity: 0.6;
+            animation: starMove 3s ease-in-out infinite;
+        }
+
+        @keyframes starMove {
+            0%, 100% { transform: translateX(0); opacity: 0.6; }
+            50% { transform: translateX(20px); opacity: 0.3; }
+        }
+
+        @keyframes cursorBlink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        /* 时间戳动态效果 */
+        .author {
+            color: rgba(255,255,255,0.7);
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+            text-align: right;
+            position: relative;
+            padding-right: 1.5rem;
+            opacity: 0.8;
+            transition: all 0.3s ease;
+        }
+
+        .author::before {
+            content: '⏳';
+            position: absolute;
+            right: -0.5rem;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.2em;
+            filter: drop-shadow(0 0 5px rgba(255,159,67,0.5));
+        }
+
+        .author:hover {
+            opacity: 1;
+            text-shadow: 0 0 15px rgba(255,255,255,0.3);
+            transform: translateX(10px);
+        }
+
+        /* 全息进度条特效 */
+        .content p {
+            position: relative;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            background: rgba(20,20,50,0.3);
+            border-left: 3px solid var(--neon-purple);
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+
+        .content p::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                90deg,
+                transparent 25%,
+                rgba(209,107,255,0.1) 50%,
+                transparent 75%
+            );
+            animation: hologramFlow 3s linear infinite;
+        }
+
+        @keyframes hologramFlow {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        /* 新增角色目录样式 */
+        .character-directory {
+            position: fixed;
+            left: 2rem;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(40, 40, 70, 0.9);
+            backdrop-filter: blur(15px);
+            border-radius: 15px;
+            padding: 1.5rem;
+            width: 280px;
+            z-index: 1000;
+            box-shadow: 0 0 40px rgba(127,154,234,0.3);
+        }
+
+        .directory-item {
+            display: flex;
+            align-items: center;
+            padding: 1rem;
+            margin: 0.8rem 0;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            background: rgba(255,255,255,0.05);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .directory-item:hover {
+            background: rgba(127,154,234,0.15);
+            transform: translateX(10px);
+        }
+
+        .directory-item::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        height: 2px;
+        background: linear-gradient(90deg, #ff9f43, #7f9aea);
+        transform: scaleX(0);
+        transition: transform 0.3s ease;
+        }
+
+        .directory-item:hover::after {
+        transform: scaleX(1);
+        }
+
+        .character-icon img {
+        width: 80%;
+        height: 80%;
+        object-fit: contain;
+        }   
+
+        .character-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin-right: 1rem;
+            border: 2px solid #ff9f43;
+            background: rgba(40, 40, 70, 0.6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .character-info h3 {
+            margin: 0;
+            color: #ff9f43;
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        .character-meta {
+            font-size: 0.9em;
+            color: #7f9aea;
+        }
+
+        
+
+        /* 响应式设计优化 */
         @media (max-width: 768px) {
             .container {
-                padding: 30px 15px;
+                margin-left: 0;
+                padding-top: 120px; /* 给目录留出空间 */
             }
-            
             h1 {
-                font-size: 2.4rem;
-                margin: 1.8rem 0;
+                font-size: 2.8rem;
+                margin: 3rem 0;
             }
 
             .article {
-                padding: 25px;
-                margin-bottom: 30px;
+                padding: 1.5rem;
+                margin: 2rem 1rem;
+                scroll-margin-top: 120px; /* 根据目录高度调整 */
+            }
+
+            h2 {
+                font-size: 1.8rem;
+                padding-left: 1rem;
             }
 
             .content p {
+                padding: 1rem;
                 font-size: 14px;
-                line-height: 1.6;
             }
 
-            .decorative-corner {
-                display: none;
+            .character-directory {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                transform: none;
+                border-radius: 0;
+                padding: 1rem;
+                height: auto;
+                overflow-y: auto;
             }
+            
+            .directory-item {
+                padding: 0.8rem;
+                margin: 0.5rem 0;
+            }
+            .character-directory {
+                overflow-x: auto;
+                white-space: nowrap;
+            }
+        }
+        
+
+        /* 粒子动画控制 */
+        .particles-js-canvas-el {
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: -1;
         }
     </style>
 </head>
 <body>
-    <!-- 新增装饰角标 -->
-    <div class="decorative-corner"></div>
-    <div class="decorative-corner"></div>
+    <!-- 在原有结构基础上添加新元素 -->
+    <div class="space-wrapper">
+       <div class="nebula-layer"></div>
+        <canvas id="star-canvas"></canvas>
+        <div class="galaxy-band" style="top:30%"></div>
+        <div class="galaxy-band" style="top:70%"></div>
+        <div class="meteor" style="top:15%;left:10%;animation-delay:1s"></div>
+        <div class="meteor" style="top:40%;left:30%;animation-delay:4s"></div>
+    </div>
+
+    <div class="space-wrapper">
+        <div class="star-layer"></div>
+        <!-- 动态生成星群 -->
+        <div class="star-cluster" style="top:15%;left:20%"></div>
+        <div class="star-cluster" style="top:30%;left:70%"></div>
+        <div class="star-cluster" style="top:65%;left:40%"></div>
+        <!-- 可继续添加更多星群 -->
+    </div>
+    <div id="particles-js"></div>
+     <!-- 新增角色目录 -->
+    <div class="character-directory">
+        <a href="#fengjin" class="directory-item">
+            <div class="character-icon">
+                <!-- 假设你的图标文件名为 fengjin-icon.png -->
+                <img src="/fengjin-icon.png" alt="风堇图标">
+            </div>
+            <div class="character-info">
+                <h3>风堇</h3>
+                <div class="character-meta">
+                    <span>命途：记忆</span><br>
+                    <span>属性：风</span>
+                </div>
+            </div>
+        </a>
     
+        <a href="#xiadie" class="directory-item">
+            <div class="character-icon">
+                <!-- 假设你的图标文件名为 xiadie-icon.png -->
+                <img src="/xiadie-icon.png" alt="遐蝶图标">
+            </div>
+            <div class="character-info">
+                <h3>遐蝶</h3>
+                <div class="character-meta">
+                    <span>命途：记忆</span><br>
+                    <span>属性：量子</span>
+                </div>
+            </div>
+        </a>
+    </div>
+    <div id="particles-js"></div>
+    <div class="container" style="margin-left: 320px;"></div>
     <div class="container">
-        <!-- 原内容保持不变 -->
-        <h1>虚构史学家 角色畅想by Hyacine</h1>
-        <div class="article">
+        <h1>虚构史学家<br>角色畅想</h1>
+        
+        <!-- 原内容结构保持不变 -->
+        <div class="article" id="fengjin">
             <!-- 风堇内容 -->
             <h2>风堇</h2>
             <div class="author">
@@ -361,7 +595,8 @@
                 装备者速度大于 <span class="numbers">135</span> 点时，每超过 <span class="numbers">1</span> 点使其治疗量提高 <span class="numbers">0.6%</span>（<span class="numbers">1%</span>） ，生命上限提高 <span class="numbers">0.6%</span>（<span class="numbers">1%</span>） ，最多计入 <span class="numbers">50</span> 点。 
             </p>    
         </div>
-        <div class="article">
+        
+        <div class="article" id="xiadie">
             <!-- 遐蝶内容 -->
             <h2>遐蝶</h2>
             <div class="author">
@@ -396,10 +631,10 @@
                 遐蝶与葬死之龙造成真实伤害时，遐蝶每有 <span class="numbers">1%</span> 暴击伤害，使真实伤害造成的伤害提高 <span class="numbers">1%</span> 。<br>
                 <span class="title-text">忆灵技·死渊吐息</span><br>
                 消耗等同于遐蝶当前生命值 <span class="numbers">37%</span> 的生命值，并使我方全体消耗等于其当前生命值 <span class="numbers">21%</span> 的生命值，对敌方目标造成等同于葬死之龙 <span class="numbers">90%</span> 生命上限的量子属性伤害，并对其相邻目标造成等同于葬死之龙 <span class="numbers">72%</span> 生命上限的量子属性伤害，与此同时，为我方全体提供能够抵消等同于葬死之龙 <span class="numbers">10%</span> 生命上限+<span class="numbers">210</span> 伤害的护盾，持续 <span class="numbers">3</span> 回合。<br>
-                <span class="title-text">强化忆灵技·终末叙事</span><br>
+                <span class="title-text">忆灵技·终末叙事</span><br>
                 消耗 <span class="numbers">3</span> 点【冥渊能量】，随后，消耗等同于遐蝶当前生命值 <span class="numbers">65%</span> 的生命值，并使我方全体消耗等于其当前生命值 <span class="numbers">45%</span> 的生命值，对敌方全体造成等同于葬死之龙 <span class="numbers">140%</span> 生命上限的量子属性伤害，并额外造成等同于该技能消耗生命值 <span class="numbers">100%</span> 的真实伤害，与此同时，为我方全体提供能够抵消等同于遐蝶 <span class="numbers">24%</span> 生命上限+<span class="numbers">630</span> 伤害的护盾，持续 <span class="numbers">3</span> 回合 。<br>
                 <span class="title-text">忆灵天赋1·冥渊共鸣</span><br>
-                葬死之龙施放强化忆灵技时，将对场上生命值最高的敌方额外造成等同于葬死之龙 <span class="numbers">220%</span> 生命上限的量子属性伤害，并对其相邻目标造成等同于葬死之龙 <span class="numbers">160%</span> 生命上限的量子属性伤害。<br>
+                葬死之龙施放忆灵技时，将对场上生命值最高的敌方额外造成等同于葬死之龙 <span class="numbers">220%</span> 生命上限的量子属性伤害，并对其相邻目标造成等同于葬死之龙 <span class="numbers">160%</span> 生命上限的量子属性伤害。<br>
                 <span class="title-text">忆灵天赋2·死渊显界</span><br>
                 葬死之龙被召唤时，立即对敌方全体造成等同于葬死之龙 <span class="numbers">20%</span> 生命上限的真实伤害。<br>
                 <span class="title-text">忆灵天赋3·终末余烬</span><br>
@@ -407,7 +642,7 @@
                 <span class="title-text">星魂1·血宴开幕</span><br>
                 使战技的次要目标受到的伤害为原伤害 <span class="numbers">125%</span> 的真实伤害 ，并使受到战技伤害的所有目标受到的伤害提高 <span class="numbers">25%</span> ，持续 <span class="numbers">2</span> 回合。<br>
                 <span class="title-text">星魂2·诗章逆转</span><br>
-                使忆灵天赋冥渊共鸣造成的伤害为原伤害 <span class="numbers">110%</span> 的真实伤害，并在葬死之龙施放强化忆灵技时，基于受到伤害的敌方目标数量自动施放一次技能，若数量小于 <span class="numbers">2</span> ，则立即额外施放 <span class="numbers">1</span> 次【葬龙钉】；若数量大于 <span class="numbers">2</span> 且小于 <span class="numbers">5</span> ，则立即额外施放 <span class="numbers">1</span> 次【哀歌环】；若数量大于等于 <span class="numbers">5</span> ，则立即额外施放 <span class="numbers">1</span> 次【终末虹】。<br>
+                使忆灵天赋冥渊共鸣造成的伤害为原伤害 <span class="numbers">110%</span> 的真实伤害，并在葬死之龙施放忆灵技时，基于受到伤害的敌方目标数量自动施放一次技能，若数量小于 <span class="numbers">2</span> ，则立即额外施放 <span class="numbers">1</span> 次【葬龙钉】；若数量大于 <span class="numbers">2</span> 且小于 <span class="numbers">5</span> ，则立即额外施放 <span class="numbers">1</span> 次【哀歌环】；若数量大于等于 <span class="numbers">5</span> ，则立即额外施放 <span class="numbers">1</span> 次【终末虹】。<br>
                 此外，若葬死之龙的暴击率超过 <span class="numbers">100%</span> ，每溢出 <span class="numbers">1%</span> 暴击率，忆灵技造成的伤害提高 <span class="numbers">2%</span> 。<br>
                 <span class="title-text">星魂3·冥渊共鸣</span><br>
                 <span class="title-text">星魂4·终末协奏</span><br>
@@ -415,13 +650,140 @@
                 <span class="title-text">星魂5·永劫终章</span><br>
                 <span class="title-text">星魂6·叙事者终幕</span><br>
                 葬死之龙存在期间，我方目标生命值降低时，降低的每点生命值会使葬死之龙造成的伤害提高 <span class="numbers">0.01%</span> 。<br>
-                施放秘技后的下一场战斗每波次开始时，葬死之龙施放的第一次强化忆灵技将额外造成等同于受到此伤害的敌方目标 <span class="numbers">30%</span> 生命上限的真实伤害，该真实伤害不享受一切伤害提高效果。<br>
+                施放秘技后的下一场战斗每波次开始时，葬死之龙施放的第一次忆灵技将额外造成等同于受到此伤害的敌方目标 <span class="numbers">30%</span> 生命上限的真实伤害，该真实伤害不享受一切伤害提高效果。<br>
                 <span class="title-text">光锥·永劫血宴的叙事者</span><br>
                 使装备者生命上限提高 <span class="numbers">24%</span>（<span class="numbers">40%</span>） 。
                 当装备者的入场速度小于等于 <span class="numbers">110</span> 时，触发以下效果：使装备者的暴击伤害提高 <span class="numbers">16%</span>（<span class="numbers">30%</span>），装备者生命值降低时，每降低等同于装备者生命上限 <span class="numbers">10%</span> 的生命值，使装备者造成的伤害提高 <span class="numbers">4%</span>（<span class="numbers">7%</span>） ，持续 <span class="numbers">3</span> 回合，该消耗可以进行叠加，最多使造成的伤害提高 <span class="numbers">40%</span>（<span class="numbers">70%</span>）。<br>
             </p>
         </div>
     </div>
+
+    <script>
+    
+    // 添加点击动画反馈
+    document.querySelectorAll('.directory-item').forEach(item => {
+        item.addEventListener('click', (e) => {
+            item.style.transform = 'scale(0.95)';
+            setTimeout(() => {
+                item.style.transform = '';
+            }, 200);
+        });
+    });
+    
+    // 自动高亮当前查看的角色
+    window.addEventListener('scroll', () => {
+        const articles = document.querySelectorAll('.article');
+        const directoryItems = document.querySelectorAll('.directory-item');
+        
+        articles.forEach((article, index) => {
+            const rect = article.getBoundingClientRect();
+            if (rect.top < 200 && rect.bottom > 200) {
+                directoryItems[index].style.background = 'rgba(127,154,234,0.2)';
+            } else {
+                directoryItems[index].style.background = '';
+            }
+        });
+    });  
+
+    // 增强版星空Canvas渲染
+    const canvas = document.getElementById('star-canvas');
+    const ctx = canvas.getContext('2d');
+    let stars = [];
+
+    function resizeCanvas() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    }
+
+    function createStars() {
+    const rootStyles = getComputedStyle(document.documentElement);
+    stars = [];
+    const count = Math.floor(window.innerWidth * window.innerHeight / 5000);
+    for(let i = 0; i < count; i++) {
+        stars.push({
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height,
+            r: Math.random() * 1.5,
+            glow: Math.random() * 10,
+            speed: Math.random() * 0.05,
+            color: Math.random() > 0.8 ? 
+                rootStyles.getPropertyValue('--star-color-2') : 
+                rootStyles.getPropertyValue('--star-color-1')
+        });
+    }
+    }
+
+    function drawStars() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        stars.forEach(star => {
+            ctx.beginPath();
+            ctx.arc(star.x, star.y, star.r, 0, Math.PI * 2);
+        
+            // 创建发光效果
+            const gradient = ctx.createRadialGradient(
+                star.x, star.y, 0, 
+                star.x, star.y, star.r + star.glow
+            );
+            gradient.addColorStop(0, star.color);
+            gradient.addColorStop(1, 'transparent');
+        
+            ctx.fillStyle = gradient;
+            ctx.fill();
+        
+            // 动态移动
+            star.y += star.speed;
+            if(star.y > canvas.height) star.y = 0;
+        });
+        requestAnimationFrame(drawStars);
+    }
+
+    // 初始化
+    resizeCanvas();
+    createStars();
+    drawStars();
+
+    // 响应窗口变化
+    window.addEventListener('resize', () => {
+        resizeCanvas();
+        createStars();
+    });
+
+    // 增强粒子配置
+    particlesJS('particles-js', {
+        particles: {
+            number: { value: 150 },
+            color: { value: ['#7f9aea', '#9d7fef', '#ff9f43'] },
+            shape: { type: 'circle' },
+            opacity: { 
+                value: 0.7,
+                random: true,
+                anim: { enable: true, speed: 1, opacity_min: 0.3 }
+            },
+            size: { 
+                value: 3, 
+                random: true,
+                anim: { enable: true, speed: 2, size_min: 1 }
+            },
+            move: {
+                enable: true,
+                speed: 1.5,
+                direction: 'none',
+                random: true,
+                straight: false,
+               out_mode: 'bounce',
+                attract: { enable: true, rotateX: 600, rotateY: 1200 }
+            }
+        },
+        interactivity: {
+            detect_on: 'canvas',
+            events: {
+                onhover: { enable: true, mode: 'repulse' },
+                onclick: { enable: true, mode: 'push' },
+               resize: true
+            }
+        }
+    }
+)
+   </script>
 </body>
 </html>
-
