@@ -437,9 +437,12 @@
 
         /* 响应式设计优化 */
         @media (max-width: 768px) {
+            html, body {
+                overflow-x: hidden;
+            }
             .container {
                 margin-left: 0;
-                padding-top: 120px; /* 给目录留出空间 */
+                padding: 80px 15px 20px; /* 上方留出目录空间 */
             }
             h1 {
                 font-size: 2.8rem;
@@ -466,18 +469,44 @@
                 position: fixed;
                 top: 0;
                 left: 0;
-                width: 100%;
                 transform: none;
                 border-radius: 0;
-                padding: 1rem;
-                height: auto;
-                overflow-y: auto;
+                width: 100%;
+                height: 60px; /* 压缩目录高度 */
+                padding: 10px;
+                overflow-x: auto;
+                overflow-y: hidden;
+                white-space: nowrap;
+                display: flex;
+                background: rgba(20, 20, 50, 0.95); /* 更深的背景 */
             }
             
             .directory-item {
-                padding: 0.8rem;
-                margin: 0.5rem 0;
+                min-width: 180px; /* 保持卡片适当宽度 */
+                margin: 0 8px;
+                padding: 8px;
+                transform: none;
             }
+            .character-icon {
+                width: 40px;
+                height: 40px;
+            }
+            .character-info h3 {
+                font-size: 1.1em;
+            }
+
+            .character-meta {
+                display: none; /* 小屏隐藏次要信息 */
+            }
+
+            .directory-item::after {
+                display: none; /* 移除底部装饰线 */
+            }
+
+            .directory-item:hover {
+                transform: scale(0.98); /* 改为缩放交互 */
+            }
+
             .character-directory {
                 overflow-x: auto;
                 white-space: nowrap;
@@ -516,6 +545,19 @@
     <div id="particles-js"></div>
      <!-- 新增角色目录 -->
     <div class="character-directory">
+        <a href="#aiqifei" class="directory-item">
+            <div class="character-icon">
+                <img src="/aiqifei-icon.png" alt="哀绮斐图标">
+            </div>
+            <div class="character-info">
+                <h3>哀绮斐</h3>
+                <div class="character-meta">
+                    <span>命途：记忆</span><br>
+                    <span>属性：冰</span>
+                </div>
+            </div>
+        </a>
+
         <a href="#fengjin" class="directory-item">
             <div class="character-icon">
                 <!-- 假设你的图标文件名为 fengjin-icon.png -->
@@ -543,6 +585,7 @@
                 </div>
             </div>
         </a>
+
     </div>
     <div id="particles-js"></div>
     <div class="container" style="margin-left: 320px;"></div>
@@ -550,6 +593,67 @@
         <h1>虚构史学家<br>角色畅想</h1>
         
         <!-- 原内容结构保持不变 -->
+        <div class="article" id="aiqifei">
+            <!-- 哀绮斐内容 -->
+            <h2>哀绮斐</h2>
+            <div class="author">
+                2025-02-25
+            </div>
+            <p class="content">
+                <span class="title-text">彩色天赋·空契余韵</span><br>
+                获取哀绮斐后或当前队伍存在哀绮斐时获得效果：战斗时，若队伍中存在至少 <span class="numbers">3</span> 名相同命途角色，且战斗持续至第 <span class="numbers">3</span> 回合时触发：使我方全体获得【余晖残响】效果，下一次行动结束时回复等同于自身生命上限 <span class="numbers">20%</span> 的生命值，并使其行动提前 <span class="numbers">20%</span>  。<br>
+                <span class="title-text">普攻·黯霜刻痕</span><br>
+                对指定敌方目标造成等同于哀绮斐 <span class="numbers">50%</span> 生命上限的冰属性伤害。<br>
+                <span class="title-text">战技·寄魂咒缚·永冻回响</span><br>
+                指定我方单体成为【魂契者】，使其造成的伤害为原伤害的 <span class="numbers">120%</span> ，持续 <span class="numbers">3</span> 回合。随后，使【魂契者】召唤忆灵幽昙。若场上存在超过 <span class="numbers">1</span> 个【魂契者】，优先使「记忆」命途且不为哀绮斐的我方目标召唤忆灵。<br>
+                【魂契者】及其召唤的忆灵施放攻击时，将额外对受到伤害时敌方目标造成等同于原伤害 <span class="numbers">8%</span> +【魂契者】 <span class="numbers">100%</span> 生命上限+哀绮斐 <span class="numbers">100%</span> 生命上限的真实伤害，并使哀绮斐获得等同于本次攻击总伤害值的【记忆结晶】。该效果【魂契者】的每回合最多触发 <span class="numbers">3</span> 次。<br>
+                <span class="title-text">终结技·永劫冰渊·记忆终焉</span><br>
+                对敌方全体造成等同于哀绮斐 <span class="numbers">120%</span> 生命上限的冰属性伤害，随后，使哀绮斐获得等同于本次攻击总伤害值 <span class="numbers">200%</span> 的【记忆结晶】。<br>
+                与此同时，使【魂契者】获得 <span class="numbers">60</span> 层【永寂烙印】，持续 <span class="numbers">3</span> 回合，最多叠加至 <span class="numbers">100</span> 层。每层【永寂烙印】会提高其及其召唤的忆灵 <span class="numbers">2%</span> 造成的伤害，持有【永寂烙印】的我方目标造成伤害时，若其无法将受到伤害的敌方目标防御力视为 <span class="numbers">0</span> ，则使其消持消耗其持有【永寂烙印】层数直至能够将敌方目标的防御力视为 <span class="numbers">0</span> ，每消耗 <span class="numbers">1</span> 层使其及其召唤的忆灵造成伤害时额外无视敌方目标 <span class="numbers">1%</span>防御力，该效果持续 <span class="numbers">3</span> 回合。<br>
+                <span class="title-text">天赋·黯月沉眠之忆</span><br>
+                忆灵幽昙初始拥有等同于【魂契者】 <span class="numbers">45%</span> +哀绮斐 <span class="numbers">50%</span> 速度的速度以及等同于【魂契者】 <span class="numbers">66%</span> 生命上限+哀绮斐 <span class="numbers">32%</span> 生命上限+ <span class="numbers">720</span> 的生命上限。幽昙施放【霜魂裂痕】时，将消耗哀绮斐持有的【记忆结晶】的 <span class="numbers">50%</span> ，使本次攻击额外造成等同于消耗值 <span class="numbers">50%</span> 的真实伤害，并在下一个回合开始时自动施放【记忆坍缩】。幽昙施放【记忆坍缩】时，将消耗哀绮斐持有的所有【记忆结晶】，使本次攻击额外造成等同于消耗值 <span class="numbers">50%</span> 的真实伤害。<br>
+                <span class="title-text">秘技·湮灭之扉</span><br> 
+                使用后，下一次战斗开始时使我方全体行动提前<span class="numbers">100%</span>，并使我方第一个释放的单攻，扩散，群攻或弹射技能造成的伤害转化为空白属性【穿透伤害】。<br>
+                  <span class="title-text">空白属性</span><br> 
+                  无属性。计算增加的伤害时，视为目标持有的增加的伤害最高的属性，计算抗性时，视为敌方目标抗性最低的属性。<br> 
+                  <span class="title-text">穿透伤害</span><br> 
+                  造成无法被减伤降低、无法被护盾抵消、不可分摊的固定伤害。<br> 
+                <span class="title-text">额外能力1·黯影回生</span><br> 
+                【魂契者】及其召唤的忆灵陷入无法战斗状态或消失时，使其立即回复等同于自身 <span class="numbers">30%</span> 生命上限的生命值或使其下一次行动结束时再消失，此效果每场战斗最多触发 <span class="numbers">2</span> 次。<br>
+                <span class="title-text">额外能力2·唤忆重幅</span><br> 
+                根据队伍中「记忆」命途角色的数量，在本场战斗中触发对应效果：<br>
+                <span class="numbers">1</span> 名记忆角色：【魂契者】及其召唤的忆灵的暴击伤害提高<span class="numbers">70%</span>。<br>
+                <span class="numbers">2</span> 名及以上记忆角色：在触发上个效果的基础上，基于队伍中「记忆」命途角色的数量，每有 <span class="numbers">1</span> 名「记忆」命途角色会使我方所有「记忆」命途角色及其召唤的忆灵造成的伤害提高，提高值等同于原伤害的 <span class="numbers">7%</span> 。<br>
+                <span class="title-text">额外能力3·共鸣复梦</span><br> 
+                由哀绮斐或幽昙造成伤害提供的【记忆结晶】为原提供值的 <span class="numbers">200%</span> 。<br>
+                <span class="title-text">忆灵技·霜魂裂痕</span><br> 
+                对敌方单体造成等同于幽昙 <span class="numbers">120%</span> 生命上限的冰属性伤害，对其相邻目标造成等同于幽昙 <span class="numbers">70%</span> 生命上限的冰属性伤害。<br>
+                <span class="title-text">忆灵技·记忆坍缩</span><br> 
+                消耗我方全体生命上限 <span class="numbers">40%</span> 的生命值，哀绮斐和幽昙向敌方全体发起连携攻击，对敌方全体造成等同于哀绮斐 <span class="numbers">200%</span> 生命上限以及幽昙 <span class="numbers">200%</span> 生命上限的冰属性伤害。<br>
+                <span class="title-text">忆灵天赋1·残影庇护</span><br> 
+                使我方全体的暴击率提高 <span class="numbers">20%</span> ，若其暴击率超过 <span class="numbers">100%</span> ，使其全属性抗性穿透提高 <span class="numbers">20%</span> 。<br>
+                <span class="title-text">忆灵天赋2·霜魂响鸣</span><br>
+                幽昙被召唤时，使召唤其的我方目标立即行动。<br>
+                <span class="title-text">忆灵天赋3·云梦苏醒</span><br> 
+                幽昙消失时，使敌方全体行动延后 <span class="numbers">50%</span> 。<br>
+                <span class="title-text">星魂1·群星恸哭·枷锁崩断之始</span><br> 
+                施放终结技后使我方全体行动提前 <span class="numbers">30%</span> 并获得<span class="numbers">40</span>层【永寂烙印】。<br>
+                <span class="title-text">星魂2·永劫轮舞·霜魂蚀心之契</span><br>
+                幽昙造成的伤害提高，提高值等同于原伤害的 <span class="numbers">80%</span> 。<br>
+                <span class="title-text">星魂3·记忆溯流·往世铭刻之阶</span><br>
+                终结技等级+<span class="numbers">2</span>，最多不超过 <span class="numbers">15</span> 级；天赋等级+<span class="numbers">2</span>，最多不超过 <span class="numbers">15</span> 级；忆灵天赋等级+<span class="numbers">1</span>，最多不超过 <span class="numbers">10</span> 级。<br>
+                <span class="title-text">星魂4·黯月沉眠·终焉回响之拥</span><br>
+                持有【永寂烙印】的我方目标速度提高 <span class="numbers">30</span> 点。<br>
+                <span class="title-text">星魂5·永冻枷锁·寂灭归零之扉</span><br>
+                战技等级+<span class="numbers">2</span>，最多不超过 <span class="numbers">15</span> 级；普攻等级+<span class="numbers">1</span>，最多不超过 <span class="numbers">10</span> 级；忆灵技等级+<span class="numbers">1</span>，最多不超过 <span class="numbers">10</span> 级。<br>
+                <span class="title-text">星魂6·终末湮灭·群忆坍缩之终</span><br>
+                幽昙对敌方目标造成伤害时，使敌方目标受到的伤害提高 <span class="numbers">20%</span> ，持续 <span class="numbers">2</span> 回合，最多叠加 <span class="numbers">2</span> 层。<br>
+                释放战技时，将同时使哀绮斐成为【魂契者】。<br>
+                <span class="title-text">光锥·永冻回响的冥契</span><br>
+                未知回响 使装备者的生命上限提高<span class="numbers">24%</span>（<span class="numbers">30%</span>）。当我方目标召唤忆灵时，使我方全体目标下次攻击全属性抗性穿透提高 <span class="numbers">12%</span>（<span class="numbers">24%</span>）。场上每存在 <span class="numbers">1</span> 个我方目标召唤的忆灵，使我方全体暴击伤害提高 <span class="numbers">12%</span>（<span class="numbers">24%</span>）。
+            </p>    
+        </div>
+
         <div class="article" id="fengjin">
             <!-- 风堇内容 -->
             <h2>风堇</h2>
@@ -571,11 +675,11 @@
                 使用秘技后，下一次战斗开始时立即召唤忆灵云界棱镜，并为我方全体附加【晨昏预兆】效果：<br> 
                 若目标生命值高于其生命上限的 <span class="numbers">50%</span> ，使其下一次技能造成的伤害为原伤害的 <span class="numbers">130%</span> ；<br> 
                 若目标生命值低于其生命上限的 <span class="numbers">50%</span> ，使其下一次受到的治疗量为原治疗量的 <span class="numbers">150%</span> 。<br> 
-                <span class="title-text">行迹1·天穹治愈链</span><br> 
+                <span class="title-text">额外能力1·天穹治愈链</span><br> 
                 云界棱镜进行攻击时，为生命值最低的我方目标回复等同于原伤害 <span class="numbers">10%</span> 的生命值。<br> 
-                <span class="title-text">行迹2·秘境共鸣</span><br> 
+                <span class="title-text">额外能力2·秘境共鸣</span><br> 
                 持有【晨昏投影】的我方目标消耗生命值时，其每消耗等同于其生命上限 <span class="numbers">10%</span> 的生命值，使风堇与云界棱镜的速度提高 <span class="numbers">1.2%</span> ，最多提高 <span class="numbers">100%</span> ，该效果持续到战斗结束。<br> 
-                <span class="title-text">行迹3·晨昏双生</span><br> 
+                <span class="title-text">额外能力3·晨昏双生</span><br> 
                 风堇每消耗等同于生命上限 <span class="numbers">5%</span> 的生命值，使我方全体造成伤害时生命上限提高 <span class="numbers">3%</span> ，持续 <span class="numbers">2</span> 回合，该效果可以进行叠加。<br> 
                 <span class="title-text">忆灵技·空界虹吸</span><br> 
                 消耗等同于风堇当前生命值 <span class="numbers">25%</span> 的生命值，对敌方全体造成等同于云界棱镜 <span class="numbers">80%</span> 生命上限的风属性伤害，并使我方全体获得能抵消等同于云界棱镜 <span class="numbers">10%</span> 生命上限伤害的护盾【天穹共鸣】，持续 <span class="numbers">2</span> 回合。<br> 
@@ -595,7 +699,7 @@
                 战斗开始时，自动触发 <span class="numbers">1</span> 次终结技，此次触发不消耗能量。<br> 
                 施放终结技时，将额外使敌方全体行动延后 <span class="numbers">50%</span> ，我方全体行动提前 <span class="numbers">40%</span> ，同时，持有【晨昏投影】的我方目标受到致命攻击时，不会陷入无法战斗状态，并使其【晨昏投影】的回合数减少 <span class="numbers">1</span> 回合。<br> 
                 <span class="title-text">光锥·晨昏秘境的叙事者</span><br> 
-                使装备者生命上限提高 <span class="numbers">36%</span>（<span class="numbers">50%</span>） ，基础速度提高 <span class="numbers">12%</span>（<span class="numbers">20%</span>） 。
+                苏醒 使装备者生命上限提高 <span class="numbers">36%</span>（<span class="numbers">50%</span>） ，基础速度提高 <span class="numbers">12%</span>（<span class="numbers">20%</span>） 。
                 装备者速度大于 <span class="numbers">135</span> 点时，每超过 <span class="numbers">1</span> 点使其治疗量提高 <span class="numbers">0.6%</span>（<span class="numbers">1%</span>） ，生命上限提高 <span class="numbers">0.6%</span>（<span class="numbers">1%</span>） ，最多计入 <span class="numbers">50</span> 点。 
             </p>    
         </div>
@@ -627,12 +731,12 @@
                 【冥渊能量】大于等于 <span class="numbers">3</span> 点时，葬死之龙的忆灵技强化为【终末叙事】。<br>
                 <span class="title-text">秘技·蝶影·冥河预兆</span><br>
                 使用秘技后，下一次战斗开始时立即消耗我方全体 <span class="numbers">42%</span> 当前生命值，并使遐蝶获得 <span class="numbers">3</span> 点【冥渊能量】，随后，召唤忆灵葬死之龙，并使遐蝶和葬死之龙的行动提前 <span class="numbers">75%</span> 。<br>
-                <span class="title-text">行迹1·终末咏叹调</span><br>
+                <span class="title-text">额外能力1·终末咏叹调</span><br>
                 【葬龙钉】，【哀歌环】与【终末虹】同时视为葬死之龙施放的忆灵技，忆灵技造成的伤害将无视敌方目标 <span class="numbers">30%</span> 防御力。<br>
-                <span class="title-text">行迹2·冥蝶之祝</span><br>
+                <span class="title-text">额外能力2·冥蝶之祝</span><br>
                 处于【冥河终章】结界内的敌方目标受到伤害时，额外受到等同于原伤害 <span class="numbers">15%</span> 的真实伤害。<br>
-                <span class="title-text">行迹3·凋零诗行</span><br>
-                遐蝶与葬死之龙造成真实伤害时，遐蝶每有 <span class="numbers">1%</span> 暴击伤害，使真实伤害造成的伤害提高 <span class="numbers">1%</span> 。<br>
+                <span class="title-text">额外能力3·凋零诗行</span><br>
+                遐蝶与葬死之龙造成真实伤害时，每有 <span class="numbers">1%</span> 暴击伤害，使真实伤害造成的伤害提高 <span class="numbers">1%</span> 。<br>
                 <span class="title-text">忆灵技·死渊吐息</span><br>
                 消耗等同于遐蝶当前生命值 <span class="numbers">37%</span> 的生命值，并使我方全体消耗等于其当前生命值 <span class="numbers">21%</span> 的生命值，对敌方目标造成等同于葬死之龙 <span class="numbers">90%</span> 生命上限的量子属性伤害，并对其相邻目标造成等同于葬死之龙 <span class="numbers">72%</span> 生命上限的量子属性伤害，与此同时，为我方全体提供能够抵消等同于葬死之龙 <span class="numbers">10%</span> 生命上限+<span class="numbers">210</span> 伤害的护盾，持续 <span class="numbers">3</span> 回合。<br>
                 <span class="title-text">忆灵技·终末叙事</span><br>
@@ -649,14 +753,16 @@
                 使忆灵天赋冥渊共鸣造成的伤害为原伤害 <span class="numbers">110%</span> 的真实伤害，并在葬死之龙施放忆灵技时，基于受到伤害的敌方目标数量自动施放一次技能，若数量小于 <span class="numbers">2</span> ，则立即额外施放 <span class="numbers">1</span> 次【葬龙钉】；若数量大于 <span class="numbers">2</span> 且小于 <span class="numbers">5</span> ，则立即额外施放 <span class="numbers">1</span> 次【哀歌环】；若数量大于等于 <span class="numbers">5</span> ，则立即额外施放 <span class="numbers">1</span> 次【终末虹】。<br>
                 此外，若葬死之龙的暴击率超过 <span class="numbers">100%</span> ，每溢出 <span class="numbers">1%</span> 暴击率，忆灵技造成的伤害提高 <span class="numbers">2%</span> 。<br>
                 <span class="title-text">星魂3·冥渊共鸣</span><br>
+                战技等级+<span class="numbers">2</span>，最多不超过 <span class="numbers">15</span> 级；天赋等级+<span class="numbers">2</span>，最多不超过 <span class="numbers">15</span> 级；忆灵技等级+<span class="numbers">1</span>，最多不超过 <span class="numbers">10</span> 级。<br>
                 <span class="title-text">星魂4·终末协奏</span><br>
                 处于【冥河终章】结界中的敌方目标防御力降低 <span class="numbers">30%</span> 。<br>
                 <span class="title-text">星魂5·永劫终章</span><br>
+                终结技等级+<span class="numbers">2</span>，最多不超过 <span class="numbers">15</span> 级；普攻等级+<span class="numbers">1</span>，最多不超过 <span class="numbers">10</span> 级；忆灵天赋等级+<span class="numbers">1</span>，最多不超过 <span class="numbers">10</span> 级。<br>
                 <span class="title-text">星魂6·叙事者终幕</span><br>
                 葬死之龙存在期间，我方目标生命值降低时，降低的每点生命值会使葬死之龙造成的伤害提高 <span class="numbers">0.01%</span> 。<br>
                 施放秘技后的下一场战斗每波次开始时，葬死之龙施放的第一次忆灵技将额外造成等同于受到此伤害的敌方目标 <span class="numbers">30%</span> 生命上限的真实伤害，该真实伤害不享受一切伤害提高效果。<br>
                 <span class="title-text">光锥·永劫血宴的叙事者</span><br>
-                使装备者生命上限提高 <span class="numbers">24%</span>（<span class="numbers">40%</span>） 。
+                终末 使装备者生命上限提高 <span class="numbers">24%</span>（<span class="numbers">40%</span>） 。
                 当装备者的入场速度小于等于 <span class="numbers">110</span> 时，触发以下效果：使装备者的暴击伤害提高 <span class="numbers">16%</span>（<span class="numbers">30%</span>），装备者生命值降低时，每降低等同于装备者生命上限 <span class="numbers">10%</span> 的生命值，使装备者造成的伤害提高 <span class="numbers">4%</span>（<span class="numbers">7%</span>） ，持续 <span class="numbers">3</span> 回合，该消耗可以进行叠加，最多使造成的伤害提高 <span class="numbers">40%</span>（<span class="numbers">70%</span>）。<br>
             </p>
         </div>
